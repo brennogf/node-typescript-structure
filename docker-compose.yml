@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  dockernode:
+    build: .
+    command: yarn dev
+    ports:
+      - '3001:3001'
+    volumes:
+      - .:/usr/app
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_PASSWORD_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - '5432:5432'
